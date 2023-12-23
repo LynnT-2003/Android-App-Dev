@@ -1,9 +1,13 @@
 package com.csx4109.assignment
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.csx4109.assignment.databinding.ActivityExampleAssignmentBinding
+
 
 /**
  * Page Name: Counting Game
@@ -21,8 +25,38 @@ import com.csx4109.assignment.databinding.ActivityExampleAssignmentBinding
  */
 
 class ExampleAssignmentActivity : AppCompatActivity() {
+    private var counter = 0
+    private lateinit var binding: ActivityExampleAssignmentBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_example_assignment)
+        binding = ActivityExampleAssignmentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Set initial value in tvCounter
+        updateCounterTextView()
+
+        // Set click listeners for buttons
+        binding.btnPlus.setOnClickListener {
+            incrementCounter()
+        }
+
+        binding.btnMinus.setOnClickListener {
+            decrementCounter()
+        }
+    }
+
+    private fun updateCounterTextView() {
+        binding.tvCounter.text = counter.toString()
+    }
+
+    private fun incrementCounter() {
+        counter++
+        updateCounterTextView()
+    }
+
+    private fun decrementCounter() {
+        counter--
+        updateCounterTextView()
     }
 }
